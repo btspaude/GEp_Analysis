@@ -30,6 +30,7 @@
 #include "TVirtualHistPainter.h"
 #include "THLimitsFinder.h"
 #include "TFitResult.h"
+#include <TTree.h>
 #include <TTreeReader.h>
 #include <TTreeReaderValue.h>
 #include <TTreeReaderArray.h>
@@ -69,8 +70,8 @@ void hcalAnalysis(int run_num, int kevents,int seg){
         cout << "Input ROOT file = " << sInFile << endl;
         cout << "Adding " << sInFile << endl;
         T->Add(sInFile);
-        cout << "Adding " << nruns << " files ... " << endl;
-        /*for (Int_t i=1; i<=nruns; i++) {
+        /*cout << "Adding " << nruns << " files ... " << endl;
+        for (Int_t i=1; i<=nruns; i++) {
             subfile = TString::Format("cdet_%d_%d_%d",RunNumber1,kevents,i);
             //subfile = TString::Format("_%d_1000000_%d",RunNumber1,i);
             sInFile = REPLAYED_DIR + "/" + subfile + ".root";
@@ -86,7 +87,7 @@ void hcalAnalysis(int run_num, int kevents,int seg){
         T->SetBranchStatus("sbs.hcal.*",1);
     
         // set branches
-        T->SetBranchAddress("sbs.hcal.clus_adctime",THCal::sbs_hcal_clus_adctime);
+        T->SetBranchAddress("sbs.hcal.clus.adctime",THCal::sbs_hcal_clus_adctime);
         T->SetBranchAddress("sbs.hcal.clus.id",THCal::sbs_hcal_clus_id);
     }
 
