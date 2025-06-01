@@ -1,0 +1,60 @@
+hcalAnalysis.C
+.L hcalAnalysis.C 
+.x hcalAnalysis.C(4230,50,36)
+.x hcalAnalysis.C(4230,50,36)
+.q
+TFile *_file0=TFile::Open("/adaqfs/home/a-onl/sbs/Rootfiles/gep5_replayed_4230_50k_events_firstseg_36.root
+TFile *_file0=TFile::Open("/adaqfs/home/a-onl/sbs/Rootfiles/gep5_replayed_4230_50k_events_firstseg_36.root")
+T->Print("sbs.hcal.clus*")
+.q
+TFile *_file0=TFile::Open("/adaqfs/home/a-onl/sbs/Rootfiles/gep5_replayed_4230_50k_events_firstseg_36.root")
+T->Print("sbs.hcal.clus*")
+.q
+TFile *_file0=TFile::Open("/adaqfs/home/a-onl/sbs/Rootfiles/gep5_replayed_4230_50k_events_firstseg_36.root")
+T->Print("sbs.hcal.clus.*")
+.q
+.x hcalAnalysis.C(4230,50,36)
+.q
+.x hcalAnalysis.C(4230,50,36)
+.q
+.x hcalAnalysis.C(4230,50,36)
+.q
+.x hcalAnalysis1.C(4230,50,36)
+.q
+.x hcalAnalysis1.C(4230,50,36)
+.x hcalAnalysis1.C(4230,50,36)
+.q
+.x hcalAnalysis1.C(4230,50,36)
+.q
+.x hcalAnalysis1.C(4230,50,36)
+.q
+.x hcalAnalysis1.C(4230,50,36)
+.x hcalAnalysis1.C(4230,50,36)
+.q
+.q
+.x hcalAnalysis1.C(4230,50,36)
+.q
+.x hcalAnalysis.C(4230,50,36)
+.q
+TFile *_file0=TFile::Open("/adaqfs/home/a-onl/sbs/Rootfiles/gep5_replayed_4230_50k_events_firstseg_36.root")
+sbs.hcal.clus.adctime->Draw()
+sbs.hcal.clus.adctime->Draw();
+.q
+.x hcalAnalysis.C(4230,50,36)
+.q
+.x hcalAnalysis.C(4230,50,36)
+.x hcalAnalysis.C(4230,50,36)
+.x hcalAnalysis.C(4230,50,36)
+.q
+.x hcalAnalysis.C(4230,50,36)
+.x hcalAnalysis.C(4230,50,36)
+.x hcalAnalysis.C(4230,50,36)
+.q
+TFile *_file0=TFile::Open("/adaqfs/home/a-onl/sbs/Rootfiles/gep5_replayed_4230_50k_events_firstseg_36.root")
+T->Print("sbs.hcal.clus*")
+.x hcalAnalysis.C(4230,50,36)
+.q
+.x hcalAnalysis.C(4230,50,36)
+.q
+TFile *_file0=TFile::Open("/adaqfs/home/a-onl/sbs/Rootfiles/gep5_replayed_4230_50k_events_firstseg_36.root")
+T->Print("sbs.hcal.clus*")

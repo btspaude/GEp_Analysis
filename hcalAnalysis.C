@@ -1,117 +1,69 @@
 #include <iostream>
-#include <fstream>
-#include <stdio.h>
-#include <sstream>
-#include <string>
-#include <TH2.h>
-#include <TStyle.h>
-#include <TCanvas.h>
-#include <math.h>
-#include <TH1D.h>
-#include <TH1F.h>
-#include <TH2D.h>
-#include <TF1.h>
-#include <TH2F.h>
-#include <TFile.h>
-#include <iomanip>
-#include <time.h>
-#include <TVector3.h>
-#include <TMath.h>
-#include "TCutG.h"
-#include <TLine.h>
-#include <TLorentzVector.h>
-#include <stdlib.h>
 #include <vector>
-#include <cmath>
-#include <TGraphErrors.h>
-#include "TLegend.h"
-#include "TVirtualPad.h"
-#include "TObjString.h"
-#include "TVirtualHistPainter.h"
-#include "THLimitsFinder.h"
-#include "TFitResult.h"
+#include <TChain.h>
+#include <TFile.h>
 #include <TTree.h>
 #include <TTreeReader.h>
-#include <TTreeReaderValue.h>
 #include <TTreeReaderArray.h>
+#include <TH1D.h>
+#include <TString.h>
 
 using namespace std;
 
 const TString REPLAYED_DIR = "/adaqfs/home/a-onl/sbs/Rootfiles";
 
-namespace THCal {
-    Double_t sbs_hcal_clus_adctime;
-    Double_t sbs_hcal_clus_id; 
-    int_t nhits;
-}
-
-TChain *T=0;
-
-//Define histograms as global pointers
+// Global histograms
+//1D hist
 TH1D *hHcal_clus_adctime;
+TH1D *hHcal_clus_x;
+TH1D *hHcal_clus_y;
 
+//2D hist
+TH2D *h2Hcal_clus_x_vs_y;
 
-//sbs.hcal.clus.adctime
-
-//main loop
-void hcalAnalysis(int run_num, int kevents,int seg){
-    //Define histograms
-    hHcal_clus_adctime = new TH1D("hHcal_clus_adctime","adctime of block; clus.atime [ns]; counts",500,-25.,200.);
-    std::cout << "test line" << std::endl;
-
-    if(!T) { 
-        // TString sInFile = REPLAYED_DIR + "/" + InFile + ".root";
-        T = new TChain("T");
+// Main function
+void hcalAnalysis(int run_num, int kevents, int seg) {
+    hHcal_clus_adctime = new TH1D("hHcal_clus_adctime","adctime of block; clus.atime [ns]; counts",500, 0, 200.);
+    hHcal_clus_x = new TH1D("hHcal_clus_x","cluster x position ; xpos (m); counts",)
     
-        TString subfile, sInFile;
-    
-        subfile = TString::Format("gep5_replayed_%d_%dk_events_firstseg_%d",run_num,kevents,seg);
-        sInFile = REPLAYED_DIR + "/" + subfile + ".root";
-        cout << "Input ROOT file = " << sInFile << endl;
-        cout << "Adding " << sInFile << endl;
-        T->Add(sInFile);
-        /*cout << "Adding " << nruns << " files ... " << endl;
-        for (Int_t i=1; i<=nruns; i++) {
-            subfile = TString::Format("cdet_%d_%d_%d",RunNumber1,kevents,i);
-            //subfile = TString::Format("_%d_1000000_%d",RunNumber1,i);
-            sInFile = REPLAYED_DIR + "/" + subfile + ".root";
-            cout << "Input ROOT file = " << sInFile << endl;
-            cout << "Adding " << sInFile << endl;
-            T->Add(sInFile);
-        }*/
-     
-        
-        // disable all branches
-        T->SetBranchStatus("*",0);
-        // enable branches
-        T->SetBranchStatus("sbs.hcal.*",1);
-    
-        // set branches
-        T->SetBranchAddress("sbs.hcal.clus.adctime",THCal::sbs_hcal_clus_adctime);
-        T->SetBranchAddress("sbs.hcal.clus.id",THCal::sbs_hcal_clus_id);
-    }
+    h2Hcal_clus_x = new TH2D
 
-    Int_t nevents = T->GetEntries();
-    cout << "N entries in tree is " << nevents << endl;
+    // Set up the TChain
+    TChain chain("T");
 
-    Int_t EventCounter = 0;
-    cout << "Starting Event Loop" << endl;
-    // loop through entries
-    for(Int_t event=0; event < nevents; event++){
-    
-        T->GetEntry(event);
-        EventCounter++;
-        if (EventCounter % 1000 == 0) {
-        cout << EventCounter << "/" << nevents << endl;
-   
+    TString subfile = TString::Format("gep5_replayed_%d_%dk_events_firstseg_%d", run_num, kevents, seg);
+    TString sInFile = REPLAYED_DIR + "/" + subfile + ".root";
+
+    cout << "Adding file: " << sInFile << endl;
+    chain.Add(sInFile);
+
+    // TTreeReader setup, named "tree"
+    TTreeReader tree(&chain);
+
+    // Declare readers for the arrays (vectors)
+    TTreeReaderArray<Double_t> sbs_hcal_clus_adctime(tree, "sbs.hcal.clus.adctime");
+    TTreeReaderArray<Double_t> sbs_hcal_clus_id(tree, "sbs.hcal.clus.id");
+    TTreeReaderArray<Double_t> sbs_hcal_clus_blk_id(tree, "sbs.hcal.clus_blk.id");
+
+    int eventCounter = 0;
+
+    cout << "Starting event loop..." << endl;
+
+    while (tree.Next()) {
+        ++eventCounter;
+
+        if (eventCounter % 1000 == 0) {
+            cout << eventCounter << " events processed." << endl;
         }
 
-        int N_clus = sbs_hcal_clus_id.GetSize();
-        for(int nElem=0;nElem<N_clus;++nElem){
+        // Fill histogram
+        Int_t N_clus = sbs_hcal_clus_id.GetSize();
+        for (int nElem = 0; nElem < N_clus; ++nElem) {
             hHcal_clus_adctime->Fill(sbs_hcal_clus_adctime[nElem]);
         }
+    }
 
-    } //End loop through tree entries
+    cout << "Finished processing " << eventCounter << " events." << endl;
+    //Eventually move Draw to its own plot Macro, can one make cuts in the plot macros rather then main macro?
     hHcal_clus_adctime->Draw();
-
-}
+} //End Main Macro
