@@ -77,7 +77,7 @@ void hcalAnalysis(int run_num, int kevents, int seg) {
 void plotHcalClusTime(int minCut = 0, int maxCut = 200) {
 
     auto c = new TCanvas("cHcal_clus_adctime", "Cluster ADC Time with Cut", 800, 600);
-    auto hHcal_clus_adctime = new TH1D("hHcal_clus_adctime", "Cluster ADC Time with cut;adctime [ns];counts", 100, 0, 200);
+    auto hHcal_clus_adctime = new TH1D("hHcal_clus_adctime", "Cluster ADC Time with cut;adctime [ns];counts", 204, 0, 200);
 
     for (size_t nElem = 0; nElem < vHcal_clus_adctime.size(); ++nElem) {
         if (vHcal_clus_adctime[nElem] > minCut && vHcal_clus_adctime[nElem] < maxCut) {
@@ -90,7 +90,7 @@ void plotHcalClusTime(int minCut = 0, int maxCut = 200) {
 
 void plotHcalBlks(double min_time = 0, double max_time = 200) {
     auto c = new TCanvas("cHcal_atimeblk", "Block ADC Time", 800, 600);
-    auto hHcal_atimeblk = new TH1D("hHcal_atimeblk", "Block ADC Time with cut;atimeblk [ns];counts", 100, 0, 200);
+    auto hHcal_atimeblk = new TH1D("hHcal_atimeblk", "Block ADC Time with cut;atimeblk [ns];counts", 204, 0, 200);
 
     for (size_t nElem = 0; nElem < vHcal_atimeblk.size(); ++nElem) {
         if (vHcal_atimeblk[nElem] > min_time && vHcal_atimeblk[nElem] < max_time) {
@@ -103,7 +103,7 @@ void plotHcalBlks(double min_time = 0, double max_time = 200) {
 void plotHcalReg(int minCut = 0, int maxCut = 200) {
 
     auto c = new TCanvas("cHcal_atime", "HCal a_time with Cut", 800, 600);
-    auto hHcal_atime = new TH1D("hHcal_atime", "HCal a_time ;a_time [ns];counts", 100, 0, 200);
+    auto hHcal_atime = new TH1D("hHcal_atime", "HCal a_time ;a_time [ns];counts", 204, 0, 200);
 
     for (size_t nElem = 0; nElem < vHcal_atime.size(); ++nElem) {
         if (vHcal_atime[nElem] > minCut && vHcal_atime[nElem] < maxCut) {

@@ -125,3 +125,7 @@ plotHcalBlks()
 .q
 .x hcalAnalysis.C(4230,50,36)
 plotHcalBlks()
+.q
+.x hcalAnalysis.C(4230,50,36)
+plotHcalBlks()
+.q
