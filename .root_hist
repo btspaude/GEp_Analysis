@@ -93,3 +93,35 @@ plotHCalADCtime()
 plotHCalADCtime()
 .x hcalAnalysis.C(4230,50,36)
 plotHCalADCtime()
+.q
+.x hcalAnalysis.C(4230,50,36)
+.q
+.x hcalAnalysis.C(4230,50,36)
+.q
+.x hcalAnalysis.C(4230,50,36)
+.q
+.x hcalAnalysis.C(4230,50,36)
+plotBlks()
+.q
+.x hcalAnalysis.C(4230,50,36)
+plotBlks()
+.q
+.x hcalAnalysis.C(4230,50,36)
+.q
+.x hcalAnalysis.C(4230,50,36)
+plotBlks()
+plotHcalBlks(
+plotHcalBlks();
+.q
+.x hcalAnalysis.C(4230,50,36)
+plotHcalBlks()
+.q
+.x hcalAnalysis.C(4230,50,36)
+.q
+.x hcalAnalysis.C(4230,50,36)
+.q
+.x hcalAnalysis.C(4230,50,36)
+plotHcalBlks()
+.q
+.x hcalAnalysis.C(4230,50,36)
+plotHcalBlks()
